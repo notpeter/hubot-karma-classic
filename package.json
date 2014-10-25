@@ -1,0 +1,23 @@
+{
+  "name": "hubot-karma-classic",
+  "description": "A Hubot script to track arbitrary karma",
+  "version": "1.0.0",
+  "main": "./src/karma-classic",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/notpeter/hubot-karma-classic.git"
+  },
+  "keywords": [
+    "hubot",
+    "karma"
+  ],
+  "author": "D. Stuart Freeman (https://github.com/stuartf)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/notpeter/hubot-karma-classic/issues"
+  },
+  "homepage": "https://github.com/notpeter/hubot-karma-classic",
+  "dependencies": {
+    "cheerio": "*"
+  }
+}
