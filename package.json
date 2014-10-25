@@ -1,7 +1,7 @@
 {
   "name": "hubot-karma-classic",
   "description": "A Hubot script to track arbitrary karma",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "./src/karma-classic",
   "repository": {
     "type": "git",
@@ -16,8 +16,5 @@
   "bugs": {
     "url": "https://github.com/notpeter/hubot-karma-classic/issues"
   },
-  "homepage": "https://github.com/notpeter/hubot-karma-classic",
-  "dependencies": {
-    "cheerio": "*"
-  }
+  "homepage": "https://github.com/notpeter/hubot-karma-classic"
 }
