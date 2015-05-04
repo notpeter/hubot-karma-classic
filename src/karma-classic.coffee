@@ -66,51 +66,73 @@ class Karma
       s.push({ name: key, karma: val })
     s.sort (a, b) -> b.karma - a.karma
 
-  top: (n = 5) ->
+  top: (n = 5) =>
     sorted = @sort()
     sorted.slice(0, n)
 
-  bottom: (n = 5) ->
+  bottom: (n = 5) =>
     sorted = @sort()
     sorted.slice(-n).reverse()
 
 module.exports = (robot) ->
   karma = new Karma robot
+
+  ###
+  # Listen for "++" messages and increment
+  ###
   robot.hear /@?(\S+[^+\s])\+\+(\s|$)/, (msg) ->
     subject = msg.match[1].toLowerCase()
     karma.increment subject
     msg.send "#{subject} #{karma.incrementResponse()} (Karma: #{karma.get(subject)})"
 
+  ###
+  # Listen for "--" messages and decrement
+  ###
   robot.hear /@?(\S+[^-\s])--(\s|$)/, (msg) ->
     subject = msg.match[1].toLowerCase()
     karma.decrement subject
     msg.send "#{subject} #{karma.decrementResponse()} (Karma: #{karma.get(subject)})"
 
+  ###
+  # Listen for "karma empty x" and empty x's karma
+  ###
   robot.respond /karma empty ?(\S+[^-\s])$/i, (msg) ->
     subject = msg.match[1].toLowerCase()
     karma.kill subject
     msg.send "#{subject} has had its karma scattered to the winds."
 
+  ###
+  # Function that handles best and worst list
+  # @param msg The message to be parsed
+  # @param title The title of the list to be returned
+  # @param rankingFunction The function to call to get the ranking list
+  ###
+  parseListMessage = (msg, title, rankingFunction) ->
+    count = if msg.match.length > 1 then msg.match[1] else null
+    verbiage = [title]
+    if count?
+      verbiage[0] = verbiage[0].concat(" ", count.toString()) 
+    for item, rank in rankingFunction(count)
+      verbiage.push "#{rank + 1}. #{item.name} - #{item.karma}"
+    msg.send verbiage.join("\n")
+
+  ###
+  # Listen for "karma best [n]" and return the top n rankings
+  ###
   robot.respond /karma best\s*(\d+)?$/i, (msg) ->
-    count = if msg.match.length > 1 then msg.match[1] else null
-    verbiage = ["The Best"]
-    if count?
-        verbiage[0] = verbiage[0].concat(" ", count.toString()) 
-    for item, rank in karma.top(count)
-      verbiage.push "#{rank + 1}. #{item.name} - #{item.karma}"
-    msg.send verbiage.join("\n")
+    parseData = parseListMessage(msg, "The Best", karma.top)
 
+  ###
+  # Listen for "karma worst [n]" and return the bottom n rankings
+  ###
   robot.respond /karma worst\s*(\d+)?$/i, (msg) ->
-    count = if msg.match.length > 1 then msg.match[1] else null
-    verbiage = ["The Worst"]
-    if count?
-        verbiage[0] = verbiage[0].concat(" ", count.toString()) 
-    for item, rank in karma.bottom(count)
-      verbiage.push "#{rank + 1}. #{item.name} - #{item.karma}"
-    msg.send verbiage.join("\n")
+    parseData = parseListMessage(msg, "The Worst", karma.bottom)
 
+  ###
+  # Listen for "karma x" and return karma for x
+  ###
   robot.respond /karma (\S+[^-\s])$/i, (msg) ->
     match = msg.match[1].toLowerCase()
-    if match != "best" && match != "worst"
+    if not (match in ["best", "worst"])
       msg.send "\"#{match}\" has #{karma.get(match)} karma."
 
