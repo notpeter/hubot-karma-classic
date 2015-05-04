@@ -91,15 +91,21 @@ module.exports = (robot) ->
     karma.kill subject
     msg.send "#{subject} has had its karma scattered to the winds."
 
-  robot.respond /karma( best)?$/i, (msg) ->
+  robot.respond /karma best\s*(\d+)?$/i, (msg) ->
+    count = if msg.match.length > 1 then msg.match[1] else null
     verbiage = ["The Best"]
-    for item, rank in karma.top()
+    if count?
+        verbiage[0] = verbiage[0].concat(" ", count.toString()) 
+    for item, rank in karma.top(count)
       verbiage.push "#{rank + 1}. #{item.name} - #{item.karma}"
     msg.send verbiage.join("\n")
 
-  robot.respond /karma worst$/i, (msg) ->
+  robot.respond /karma worst\s*(\d+)?$/i, (msg) ->
+    count = if msg.match.length > 1 then msg.match[1] else null
     verbiage = ["The Worst"]
-    for item, rank in karma.bottom()
+    if count?
+        verbiage[0] = verbiage[0].concat(" ", count.toString()) 
+    for item, rank in karma.bottom(count)
       verbiage.push "#{rank + 1}. #{item.name} - #{item.karma}"
     msg.send verbiage.join("\n")
 
