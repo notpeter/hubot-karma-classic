@@ -90,8 +90,10 @@ module.exports = (robot) ->
   ###
   robot.hear /@?(\S+[^-\s])--(\s|$)/, (msg) ->
     subject = msg.match[1].toLowerCase()
-    karma.decrement subject
-    msg.send "#{subject} #{karma.decrementResponse()} (Karma: #{karma.get(subject)})"
+    # avoid catching HTML comments
+    unless subject[-2..] == "<!"
+      karma.decrement subject
+      msg.send "#{subject} #{karma.decrementResponse()} (Karma: #{karma.get(subject)})"
 
   ###
   # Listen for "karma empty x" and empty x's karma
