@@ -12,8 +12,8 @@
 #   <thing>-- - take away some of thing's karma
 #   hubot karma <thing> - check thing's karma (if <thing> is omitted, show the top 5)
 #   hubot karma empty <thing> - empty a thing's karma
-#   hubot karma best - show the top 5
-#   hubot karma worst - show the bottom 5
+#   hubot karma best [n] - show the top n (default: 5)
+#   hubot karma worst [n] - show the bottom n (default: 5)
 #
 # Author:
 #   D. Stuart Freeman (@stuartf) https://github.com/stuartf
