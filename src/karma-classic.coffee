@@ -15,9 +15,10 @@
 #   hubot karma best [n] - show the top n (default: 5)
 #   hubot karma worst [n] - show the bottom n (default: 5)
 #
-# Author:
+# Contributors:
 #   D. Stuart Freeman (@stuartf) https://github.com/stuartf
-#
+#   Andy Beger (@abeger) https://github.com/abeger
+
 
 class Karma
 
@@ -113,7 +114,7 @@ module.exports = (robot) ->
     count = if msg.match.length > 1 then msg.match[1] else null
     verbiage = [title]
     if count?
-      verbiage[0] = verbiage[0].concat(" ", count.toString()) 
+      verbiage[0] = verbiage[0].concat(" ", count.toString())
     for item, rank in rankingFunction(count)
       verbiage.push "#{rank + 1}. #{item.name} - #{item.karma}"
     msg.send verbiage.join("\n")

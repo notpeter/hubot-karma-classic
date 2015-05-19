@@ -1,7 +1,7 @@
 {
   "name": "hubot-karma-classic",
   "description": "A Hubot script to track arbitrary karma",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "./src/karma-classic",
   "repository": {
     "type": "git",
@@ -12,6 +12,9 @@
     "karma"
   ],
   "author": "D. Stuart Freeman (https://github.com/stuartf)",
+  "contributors": [
+    "Andy Beger (https://github.com/abeger)"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/notpeter/hubot-karma-classic/issues"
