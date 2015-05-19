@@ -20,7 +20,12 @@ repackaged in the new npm package style format.  Use as you will.
     hubot karma best - show the top 5
     hubot karma worst - show the bottom 5
 
-### Installation
+### Installation (new style):
+
 1. cd into your hubot dir, run `npm install --save hubot-karma-classic` (adds a dependency in package.json).
 2. Add `"hubot-karma-classic"` to your `external-scripts.json` file.
 3. Restart Hubot.
+
+### Installation (old style):
+
+Place hubot-karma-class.coffee to your hubot/scripts directory. Restart hubot.
