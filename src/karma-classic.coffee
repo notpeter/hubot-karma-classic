@@ -52,10 +52,10 @@ class Karma
     @robot.brain.data.karma = @cache
 
   incrementResponse: ->
-     @increment_responses[Math.floor(Math.random() * @increment_responses.length)]
+    @increment_responses[Math.floor(Math.random() * @increment_responses.length)]
 
   decrementResponse: ->
-     @decrement_responses[Math.floor(Math.random() * @decrement_responses.length)]
+    @decrement_responses[Math.floor(Math.random() * @decrement_responses.length)]
 
   get: (thing) ->
     k = if @cache[thing] then @cache[thing] else 0
