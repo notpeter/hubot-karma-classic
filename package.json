@@ -1,7 +1,7 @@
 {
   "name": "hubot-karma-classic",
   "description": "A Hubot script to track arbitrary karma",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "./src/karma-classic",
   "repository": {
     "type": "git",
