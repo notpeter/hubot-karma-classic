@@ -15,7 +15,7 @@
 #   hubot karma best [n] - show the top n (default: 5)
 #   hubot karma worst [n] - show the bottom n (default: 5)
 #
-# Contributors:
+# Author:
 #   D. Stuart Freeman (@stuartf) https://github.com/stuartf
 #   Andy Beger (@abeger) https://github.com/abeger
 
